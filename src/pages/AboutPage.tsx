@@ -95,9 +95,12 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onBookNow }) => {
             <div className="lg:col-span-6">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl aspect-video border border-slate-200">
                 <img
-                  src="/src/assets/images/depot_maintenance_safety_1794388765516.jpg"
+                  src="/images/depot_maintenance_safety_1794388765516.jpg"
                   alt="Vandana Travels Kolkata Fleet Maintenance Bay"
                   className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.currentTarget.src = 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80';
+                  }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
                 <div className="absolute bottom-4 left-4 text-white">

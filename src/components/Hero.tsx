@@ -19,10 +19,13 @@ export const Hero: React.FC<HeroProps> = ({ onBookClick }) => {
       {/* Background Image Container with Luxury Bus on the Right */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/src/assets/images/hero_luxury_bus_1794142792926.jpg"
+          src="/images/hero_luxury_bus_1794142792926.jpg"
           alt="Vandana Travels Modern Luxury Bus Coach on Scenic Highway at Sunset"
           className="w-full h-full object-cover object-right-bottom sm:object-right"
           referrerPolicy="no-referrer"
+          onError={(e) => {
+            e.currentTarget.src = 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1920&q=80';
+          }}
         />
 
         {/* Dark Navy Gradient Overlay: Strong opacity on the left, softening towards the right for the bus to shine */}

@@ -4,6 +4,14 @@ import { ArrowUpRight, Clock, MapPin, ChevronRight, Calendar } from 'lucide-reac
 import { POPULAR_ROUTES } from '../data/mockData.ts';
 import { RouteItem } from '../types.ts';
 
+const ROUTE_FALLBACKS: Record<string, string> = {
+  'kol-digha': 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
+  'kol-puri': 'https://images.unsplash.com/photo-1600100397608-f010f443b772?auto=format&fit=crop&w=800&q=80',
+  'kol-bbsr': 'https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&w=800&q=80',
+  'kol-darj': 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=800&q=80',
+  'kol-mandarmani': 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=800&q=80',
+};
+
 interface PopularRoutesProps {
   onSelectRoute: (route: RouteItem) => void;
   onViewAllRoutes?: () => void;
@@ -14,10 +22,10 @@ export const PopularRoutes: React.FC<PopularRoutesProps> = ({
   onViewAllRoutes,
 }) => {
   return (
-    <section id="routes" className="py-20 bg-slate-50 border-b border-slate-200/60">
+    <section id="routes" className="py-16 sm:py-20 bg-slate-50 border-b border-slate-200/60 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 gap-4">
           <div>
             <div className="inline-flex items-center gap-2 mb-2">
               <span className="w-5 h-0.5 bg-orange-500 rounded-full" />
@@ -33,19 +41,24 @@ export const PopularRoutes: React.FC<PopularRoutesProps> = ({
             </p>
           </div>
 
-          {onViewAllRoutes && (
-            <button
-              onClick={onViewAllRoutes}
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-white hover:bg-orange-50 text-orange-600 border border-orange-200 hover:border-orange-400 font-bold text-sm rounded-xl transition-all shadow-sm cursor-pointer self-start md:self-auto"
-            >
-              <span>Explore All Routes & Timetables</span>
-              <ChevronRight className="w-4 h-4" />
-            </button>
-          )}
+          <div className="flex items-center justify-between sm:justify-end gap-3">
+            <span className="text-xs font-semibold text-orange-600 sm:hidden">
+              Swipe to explore →
+            </span>
+            {onViewAllRoutes && (
+              <button
+                onClick={onViewAllRoutes}
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-white hover:bg-orange-50 text-orange-600 border border-orange-200 hover:border-orange-400 font-bold text-sm rounded-xl transition-all shadow-sm cursor-pointer self-start md:self-auto"
+              >
+                <span>Explore All Routes & Timetables</span>
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            )}
+          </div>
         </div>
 
-        {/* Five destination cards in one horizontal row on desktop (scroll/grid on mobile) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+        {/* Five destination cards: swipeable on mobile, 5-col on desktop */}
+        <div className="flex overflow-x-auto pb-4 snap-x snap-mandatory sm:grid sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-5 scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0">
           {POPULAR_ROUTES.map((route, index) => (
             <motion.div
               key={route.id}
@@ -55,7 +68,7 @@ export const PopularRoutes: React.FC<PopularRoutesProps> = ({
               transition={{ duration: 0.35, delay: index * 0.08 }}
               whileHover={{ y: -6 }}
               onClick={() => onSelectRoute(route)}
-              className="group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl border border-slate-200/80 hover:border-orange-300 transition-all duration-300 flex flex-col cursor-pointer"
+              className="group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl border border-slate-200/80 hover:border-orange-300 transition-all duration-300 flex flex-col cursor-pointer min-w-[260px] sm:min-w-0 snap-center"
             >
               {/* Destination Photograph Container */}
               <div className="relative h-44 sm:h-48 w-full overflow-hidden bg-slate-100">
@@ -65,6 +78,10 @@ export const PopularRoutes: React.FC<PopularRoutesProps> = ({
                   className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
                   referrerPolicy="no-referrer"
                   loading="lazy"
+                  onError={(e) => {
+                    const fallback = ROUTE_FALLBACKS[route.id] || 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80';
+                    e.currentTarget.src = fallback;
+                  }}
                 />
 
                 {/* Subtle gradient overlay for readability */}

@@ -33,15 +33,15 @@ export const TopBar: React.FC<TopBarProps> = ({
 
         {/* Right: Manage Booking, Language */}
         <div className="flex items-center gap-3 sm:gap-5 ml-auto text-xs">
-          <button
-            onClick={() => onNavigate('manage')}
-            className="flex items-center gap-1.5 text-slate-300 hover:text-orange-400 font-semibold transition-colors cursor-pointer"
+          <a
+            href="tel:+919830045678"
+            className="hidden sm:flex items-center gap-1.5 text-slate-300 hover:text-orange-400 font-semibold transition-colors"
           >
-            <CalendarCheck className="w-3.5 h-3.5 text-orange-400" />
-            <span>Manage Booking</span>
-          </button>
+            <span className="text-orange-400">●</span>
+            <span>24×7 Care: +91 98300 45678</span>
+          </a>
 
-          <span className="text-slate-600" aria-hidden="true">|</span>
+          <span className="hidden sm:inline text-slate-600" aria-hidden="true">|</span>
 
           <button
             onClick={() => onNavigate('manage')}

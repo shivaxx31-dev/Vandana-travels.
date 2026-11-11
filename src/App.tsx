@@ -31,6 +31,7 @@ import { AboutUsModal } from './components/Modals/AboutUsModal.tsx';
 import { ContactModal } from './components/Modals/ContactModal.tsx';
 import { LegalModal } from './components/Modals/LegalModal.tsx';
 import { VandanaAIChat } from './components/VandanaAIChat.tsx';
+import { MobileBottomNav } from './components/MobileBottomNav.tsx';
 
 import { RouteItem, FleetItem, BookingRecord, ActivePage } from './types.ts';
 
@@ -124,7 +125,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 flex flex-col font-sans antialiased selection:bg-orange-500 selection:text-white">
+    <div className="min-h-screen bg-white text-slate-900 flex flex-col font-sans antialiased selection:bg-orange-500 selection:text-white pb-16 md:pb-0">
       {/* SECTION 1 — TOP INFORMATION BAR */}
       <TopBar
         onNavigate={handleNavigate}
@@ -309,6 +310,13 @@ export default function App() {
           setSearchParams((prev) => ({ ...prev, from, to }));
           setIsSearchOpen(true);
         }}
+      />
+
+      {/* 8. Mobile Bottom Navigation Bar (1-tap quick navigation for mobile users) */}
+      <MobileBottomNav
+        activePage={activePage}
+        onNavigate={handleNavigate}
+        onQuickBook={scrollToBooking}
       />
     </div>
   );

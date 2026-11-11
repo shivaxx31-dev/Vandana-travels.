@@ -287,9 +287,12 @@ export const FleetPage: React.FC<FleetPageProps> = ({ onBookNow }) => {
             <div className="lg:col-span-6">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 aspect-video">
                 <img
-                  src="/src/assets/images/depot_maintenance_safety_1794388765516.jpg"
+                  src="/images/depot_maintenance_safety_1794388765516.jpg"
                   alt="Vandana Travels Maintenance Bay in Kolkata"
                   className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.currentTarget.src = 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80';
+                  }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                 <span className="absolute bottom-3 left-3 bg-black/60 backdrop-blur-md px-3 py-1 rounded-lg text-xs font-bold text-white">

@@ -108,7 +108,7 @@ export const VandanaAIChat: React.FC<VandanaAIChatProps> = ({
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 z-40 bg-orange-600 hover:bg-orange-500 text-white p-3.5 sm:px-5 sm:py-3.5 rounded-full shadow-2xl shadow-orange-600/40 hover:shadow-orange-600/60 transition-all duration-300 flex items-center gap-2.5 cursor-pointer transform hover:scale-105"
+          className="fixed bottom-20 md:bottom-6 right-4 sm:right-6 z-40 bg-orange-600 hover:bg-orange-500 text-white p-3.5 sm:px-5 sm:py-3.5 rounded-full shadow-2xl shadow-orange-600/40 hover:shadow-orange-600/60 transition-all duration-300 flex items-center gap-2.5 cursor-pointer transform hover:scale-105"
           aria-label="Open Vandana AI Travel Concierge"
         >
           <div className="relative">

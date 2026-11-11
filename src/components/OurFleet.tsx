@@ -4,6 +4,12 @@ import { Eye, CheckCircle2, ChevronRight, Bus } from 'lucide-react';
 import { FLEET_LIST } from '../data/mockData.ts';
 import { FleetItem } from '../types.ts';
 
+const FLEET_FALLBACKS: Record<string, string> = {
+  'ac-sleeper': 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80',
+  'ac-seater': 'https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=800&q=80',
+  'non-ac-seater': 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80',
+};
+
 interface OurFleetProps {
   onViewFleetClick: (item?: FleetItem) => void;
   onExploreAllFleet?: () => void;
@@ -63,6 +69,10 @@ export const OurFleet: React.FC<OurFleetProps> = ({
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   referrerPolicy="no-referrer"
                   loading="lazy"
+                  onError={(e) => {
+                    const fallback = FLEET_FALLBACKS[fleet.id] || 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80';
+                    e.currentTarget.src = fallback;
+                  }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 

@@ -17,6 +17,14 @@ import {
 import { POPULAR_ROUTES, BOARDING_POINTS } from '../data/mockData.ts';
 import { RouteItem } from '../types.ts';
 
+const ROUTE_FALLBACKS: Record<string, string> = {
+  'kol-digha': 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
+  'kol-puri': 'https://images.unsplash.com/photo-1600100397608-f010f443b772?auto=format&fit=crop&w=800&q=80',
+  'kol-bbsr': 'https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&w=800&q=80',
+  'kol-darj': 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=800&q=80',
+  'kol-mandarmani': 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=800&q=80',
+};
+
 interface RoutesPageProps {
   onBookRoute: (from: string, to: string) => void;
 }
@@ -109,6 +117,10 @@ export const RoutesPage: React.FC<RoutesPageProps> = ({ onBookRoute }) => {
                       alt={route.name}
                       className="w-full h-full object-cover"
                       loading="lazy"
+                      onError={(e) => {
+                        const fallback = ROUTE_FALLBACKS[route.id] || 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80';
+                        e.currentTarget.src = fallback;
+                      }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
                     <span className="absolute bottom-1.5 left-1.5 text-[10px] font-bold text-white bg-black/60 px-1.5 py-0.5 rounded">
@@ -163,6 +175,10 @@ export const RoutesPage: React.FC<RoutesPageProps> = ({ onBookRoute }) => {
                     src={selectedRoute.image}
                     alt={selectedRoute.name}
                     className="w-full h-full object-cover"
+                    onError={(e) => {
+                      const fallback = ROUTE_FALLBACKS[selectedRoute.id] || 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=80';
+                      e.currentTarget.src = fallback;
+                    }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0b192c] via-[#0b192c]/50 to-transparent" />
 
