@@ -1,0 +1,6 @@
+{
+  "name": "Vandana Travels — Premium Bus Travel Services Across India",
+  "description": "Book luxury AC Sleeper, AC Seater, and intercity bus tickets with Vandana Travels across Kolkata, Digha, Puri, Darjeeling, and East India. Safe, comfortable, and reliable bus services.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
